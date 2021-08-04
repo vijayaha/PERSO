@@ -1,0 +1,48 @@
+root@ip-172-31-21-151:~/namespaces# k apply -f pod-in-ns.yaml
+pod/pod-in-ns created
+*********
+root@ip-172-31-21-151:~/namespaces# k get pods -n hari-preprod
+NAME        READY   STATUS              RESTARTS   AGE
+pod-in-ns   0/1     ContainerCreating   0          17s
+
+***********
+root@ip-172-31-21-151:~/namespaces# k get pods -n hari-preprod
+NAME        READY   STATUS    RESTARTS   AGE
+pod-in-ns   1/1     Running   0          20s
+
+*******
+root@ip-172-31-21-151:~/namespaces# k get pods -n hari-preprod
+NAME        READY   STATUS    RESTARTS   AGE
+pod-in-ns   1/1     Running   0          21s
+
+**********
+root@ip-172-31-21-151:~/namespaces# k get ns
+NAME                 STATUS   AGE
+default              Active   9d
+hari-preprod         Active   20m
+kube-node-lease      Active   9d
+kube-public          Active   9d
+kube-system          Active   9d
+local-path-storage   Active   9d
+
+********
+root@ip-172-31-21-151:~/namespaces# k describe ns hari-preprod
+Name:         hari-preprod
+Labels:       kubernetes.io/metadata.name=hari-preprod
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+***************
+root@ip-172-31-21-151:~/namespaces# k describe ns hari-preprod
+Name:         hari-preprod
+Labels:       kubernetes.io/metadata.name=hari-preprod
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
