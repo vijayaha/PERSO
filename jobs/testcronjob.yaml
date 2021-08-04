@@ -1,0 +1,28 @@
+root@ip-172-31-21-151:~/jobs# kubectl create cj testcronjob --image=centos --schedule="5 4 * * *" -o yaml --dry-run=client > cronjob.yaml
+
+
+*******************
+
+root@ip-172-31-21-151:~/jobs# cat cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: testcronjob
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: testcronjob
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: centos
+            name: testcronjob
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: 5 4 * * *
+status: {}

@@ -1,0 +1,42 @@
+kubectl create job simplecentosjob --image=centos -o yaml >simplecentosjob.yaml
+***********************
+
+root@ip-172-31-21-151:~/jobs# cat simplecentosjob.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: "2021-08-04T10:56:37Z"
+  labels:
+    controller-uid: 4f5e9e46-62d1-4fa6-8fa0-8a04c87645c9
+    job-name: simplecentosjob
+  name: simplecentosjob
+  namespace: default
+  resourceVersion: "1679998"
+  uid: 4f5e9e46-62d1-4fa6-8fa0-8a04c87645c9
+spec:
+  backoffLimit: 6
+  completions: 1
+  parallelism: 1
+  selector:
+    matchLabels:
+      controller-uid: 4f5e9e46-62d1-4fa6-8fa0-8a04c87645c9
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        controller-uid: 4f5e9e46-62d1-4fa6-8fa0-8a04c87645c9
+        job-name: simplecentosjob
+    spec:
+      containers:
+      - image: centos
+        imagePullPolicy: Always
+        name: simplecentosjob
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
