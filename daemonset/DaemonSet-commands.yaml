@@ -1,0 +1,6 @@
+ 2068  kubectl apply -f DaemonSet.yaml
+ 2069  clear
+ 2070  kubectl get ds
+ 2071  kubectl describe ds daemonset
+ 2072  pwd
+ 2073  kubectl get pods -o wide

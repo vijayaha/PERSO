@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: mynginx2
+  name: mynginx2
+spec:
+  containers:
+  - image: nginx:1.9.1
+    name: mynginx2
+    ports:
+    - containerPort: 80
+    volumeMounts:
+      - name: conf
+        mountPath: /etc/conf
+    resources: {}
+  volumes:
+     - name: conf
+       configMap:
+         name: hari-cm
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

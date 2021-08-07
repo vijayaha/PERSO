@@ -1,0 +1,34 @@
+root@ip-172-31-21-151:~/configmap# k create configmap hari-cm --from-file=config-file.cfg
+configmap/hari-cm created
+
+root@ip-172-31-21-151:~/configmap# k get cm -o wide
+NAME               DATA   AGE
+hari-cm            1      8s
+kube-root-ca.crt   1      29h
+
+ 2134  k apply -f pod-cm2.yaml
+ 
+ root@ip-172-31-21-151:~/configmap# k get pods -o wide
+NAME                READY   STATUS    RESTARTS   AGE   IP           NODE           NOMINATED NODE   READINESS GATES
+mynginx2            1/1     Running   0          73s   10.244.2.8   kind-worker2   <none>           <none>
+nginx1              1/1     Running   0          28h   10.244.1.4   kind-worker    <none>           <none>
+pod-affinity        0/1     Pending   0          28h   <none>       <none>         <none>           <none>
+with-pod-affinity   0/1     Pending   0          28h   <none>       <none>         <none>           <none>
+
+
+---------------
+
+ 2150  kubectl create configmap hari-cm1 --from-literal=VAR1=RED --from-literal=VAR2=BLUE
+ 2154  k describe cm hari-cm1
+ 2162  k apply -f pod-cm2.yaml
+
+root@ip-172-31-21-151:~/configmap# k get pods -o wide
+NAME                READY   STATUS    RESTARTS   AGE    IP           NODE           NOMINATED NODE   READINESS GATES
+mynginx2            1/1     Running   0          9m3s   10.244.2.8   kind-worker2   <none>           <none>
+mynginx3            1/1     Running   0          67s    10.244.2.9   kind-worker2   <none>           <none>
+nginx1              1/1     Running   0          28h    10.244.1.4   kind-worker    <none>           <none>
+pod-affinity        0/1     Pending   0          28h    <none>       <none>         <none>           <none>
+with-pod-affinity   0/1     Pending   0          28h    <none>       <none>         <none>           <none>
+
+
+

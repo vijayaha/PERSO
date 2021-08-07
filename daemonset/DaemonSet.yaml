@@ -1,0 +1,18 @@
+# fluentd-ds-allnodes.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset
+spec:
+  template:
+    metadata:
+      labels:
+        name: alpine-ds
+    spec:
+      containers:
+      - name: alpine-ds
+        image: alpine
+  selector:
+    matchLabels:
+      name: alpine-ds
+
